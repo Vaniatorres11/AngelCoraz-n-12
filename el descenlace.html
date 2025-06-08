@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cosas que nos gustaría hacer en el futuro</title>
+  <style>
+    /* Estilo base */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+
+    /* Fondo animado */
+    .background {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      overflow: hidden;
+    }
+
+    .stars, .stars2, .stars3 {
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background-repeat: repeat;
+      background-position: 0 0;
+      background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+      animation: moveStars 100s linear infinite;
+    }
+
+    .stars2 {
+      opacity: 0.3;
+      animation-duration: 200s;
+    }
+
+    .stars3 {
+      opacity: 0.1;
+      animation-duration: 300s;
+    }
+
+    @keyframes moveStars {
+      from { transform: translateY(0); }
+      to { transform: translateY(-150%); }
+    }
+
+    /* Contenedor principal */
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Texto iluminado */
+    h1, .task-title {
+      text-align: center;
+      color: #ff004f;
+      text-shadow: 0 0 10px #ff004f, 0 0 20px #ff004f, 0 0 30px #ff004f;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    form input, form button {
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      background: linear-gradient(90deg, #007bff, #ff004f);
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #ff004f, #007bff);
+    }
+
+    #task-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    .task-item {
+      background: rgba(255, 255, 255, 0.05);
+      border-left: 5px solid #007bff;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      backdrop-filter: blur(5px);
+    }
+
+    .task-item img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .task-info {
+      flex: 1;
+    }
+
+    .task-desc {
+      font-size: 0.9em;
+      color: #ccc;
+    }
+
+    .delete-btn {
+      background: red;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button {
+            padding: 12px 25px;
+            margin-top: 30px;
+            background-color: #8008a5;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            display: block;
+            margin: 40px auto 0;
+            text-align: center;
+
+        }
+
+        button:hover {
+            background-color: #184599;
+            transform: scale(1.05);
+        }
+        @media (max-width: 768px) {
+        body {
+            font-size: 14px;
+        }
+    }
+    /* Estilos para pantallas pequeñas (móviles) */
+    @media (max-width: 480px) {
+        body {
+            font-size: 12px;
+        }
+    }
+  </style>
+</head>
+<body>
+  <!-- Fondo con estrellas -->
+  <div class="background">
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="container">
+    <h1>Cosas que nos gustaría hacer en el futuro</h1>
+
+    <form id="todo-form">
+      <input type="text" id="task-title" placeholder="Título de la tarea" required />
+      <input type="text" id="task-desc" placeholder="Descripción" />
+      <input type="file" id="task-img" accept="image/*" />
+      <button type="submit">Agregar</button>
+    </form>
+
+    <ul id="task-list"></ul>
+  </div>
+
+  <!-- Script -->
+  <script>
+    const form = document.getElementById('todo-form');
+    const taskList = document.getElementById('task-list');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const title = document.getElementById('task-title').value;
+      const desc = document.getElementById('task-desc').value;
+      const imgInput = document.getElementById('task-img');
+      const file = imgInput.files[0];
+
+      const taskItem = document.createElement('li');
+      taskItem.className = 'task-item';
+
+      const imageElement = document.createElement('img');
+      imageElement.alt = 'Imagen de la tarea';
+
+      const infoDiv = document.createElement('div');
+      infoDiv.className = 'task-info';
+      infoDiv.innerHTML = `
+        <div class="task-title">${title}</div>
+        <div class="task-desc">${desc}</div>
+      `;
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = 'Eliminar';
+      deleteBtn.className = 'delete-btn';
+      deleteBtn.onclick = () => taskItem.remove();
+
+      function renderTask() {
+        taskItem.appendChild(imageElement);
+        taskItem.appendChild(infoDiv);
+        taskItem.appendChild(deleteBtn);
+        taskList.appendChild(taskItem);
+        form.reset();
+      }
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          imageElement.src = event.target.result;
+          renderTask();
+        };
+        reader.readAsDataURL(file);
+      } else {
+        imageElement.src = 'https://via.placeholder.com/60';
+        renderTask();
+      }
+    });
+  </script>
+  <a href="file:///E:/Angel%20corazon/index.html">
+    <button>Pachomito</button>
+  </a>
+</body>
+</html>
+

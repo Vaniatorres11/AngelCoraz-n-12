@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nuestra Historia de Amor</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .background {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+    }
+
+    .stars, .stars2, .stars3 {
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background-repeat: repeat;
+      animation: moveStars 100s linear infinite;
+    }
+
+    .stars {
+      background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+      opacity: 0.5;
+    }
+
+    .stars2 {
+      background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+      opacity: 0.3;
+      animation-duration: 200s;
+    }
+
+    .stars3 {
+      background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+      opacity: 0.1;
+      animation-duration: 300s;
+    }
+
+    @keyframes moveStars {
+      from { transform: translateY(0); }
+      to { transform: translateY(-100%); }
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 3rem;
+      color: #ff4d4d;
+      text-shadow: 0 0 10px #ff4d4d, 0 0 20px #ff4d4d;
+      margin-top: 40px;
+    }
+
+    .story-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .story-box {
+      background-color: rgba(255, 255, 255, 0.08);
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 30px;
+  
+      position: relative;
+    }
+
+    .story-box img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-top: 15px;
+      background-color: #e60000;
+    }
+
+    .story-box h2 {
+      color: #ff9999;
+      margin-bottom: 10px;
+    }
+
+    .story-box p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background-color: #e60000;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    /* Formulario */
+    .formulario {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 15px;
+      margin: 20px auto;
+      max-width: 900px;
+    }
+
+    .formulario input, .formulario textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    .formulario button {
+      padding: 12px 20px;
+      font-size: 16px;
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .formulario button:hover {
+      background-color: #e63939;
+    }
+
+    /* Galería */
+    .gallery-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-top: 50px;
+      color: #ffcccc;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .gallery img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.1);
+    }
+
+    a button {
+      margin-top: 20px;
+    }
+     button {
+            padding: 12px 25px;
+            margin-top: 30px;
+            background-color: #ff4d4d;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            display: block;
+            margin: 40px auto 0;
+            text-align: center;
+
+        }
+
+        button:hover {
+            background-color: #184599;
+            transform: scale(1.05);
+        }
+            @media (max-width: 768px) {
+        body {
+            font-size: 14px;
+        }
+    }
+    /* Estilos para pantallas pequeñas (móviles) */
+    @media (max-width: 480px) {
+        body {
+            font-size: 12px;
+        }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fondo animado -->
+  <div class="background">
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+  </div>
+
+  <h1>¿Cuál es el recuerdo que quisieras guardar toda tu vida?</h1>
+
+  <!-- Formulario para agregar historia -->
+  <div class="formulario">
+    <input type="text" id="titulo" placeholder="Nombre de la historia">
+    <textarea id="texto" rows="5" placeholder="Describe este recuerdo..."></textarea>
+    <input type="file" id="imagenInput" accept="image/*">
+    <button onclick="guardarHistoria()">Guardar Recuerdo</button>
+  </div>
+
+  <!-- Contenedor de historias -->
+  <div class="story-container" id="storyContainer"></div>
+
+  <!-- Galería final -->
+  <h2 class="gallery-title">Nuestros recuerdos </h2>
+  <div class="gallery">
+    <img src="img/foto1 (1).jpeg" alt="Recuerdo 1">
+    <img src="img/foto 2.jpeg" alt="Recuerdo 2">
+    <img src="img/foto 3.jpeg" alt="Recuerdo 3">
+    <img src="img/WhatsApp Image 2025-06-07 at 6.46.46 PM.jpeg" alt="Recuerdo 4">
+  </div>
+
+  <a href="file:///E:/Angel%20corazon/index.html">
+    <button>Pachomito</button>
+  </a>
+
+  <script>
+    let historias = JSON.parse(localStorage.getItem('historias')) || [];
+
+    function mostrarHistorias() {
+      const contenedor = document.getElementById('storyContainer');
+      contenedor.innerHTML = '';
+      historias.forEach((historia, index) => {
+        const box = document.createElement('div');
+        box.className = 'story-box';
+        box.innerHTML = `
+          <button class="delete-btn" onclick="eliminarHistoria(${index})">Eliminar</button>
+          <h2>${historia.titulo}</h2>
+          <p>${historia.texto}</p>
+          ${historia.imagen ? `<img src="${historia.imagen}" alt="Imagen del recuerdo">` : ''}
+        `;
+        contenedor.appendChild(box);
+      });
+    }
+
+    function guardarHistoria() {
+      const titulo = document.getElementById('titulo').value.trim();
+      const texto = document.getElementById('texto').value.trim();
+      const imagenInput = document.getElementById('imagenInput');
+
+      if (!titulo || !texto) {
+        alert("Por favor escribe un título y una historia.");
+        return;
+      }
+
+      if (imagenInput.files && imagenInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          historias.push({ titulo, texto, imagen: e.target.result });
+          localStorage.setItem('historias', JSON.stringify(historias));
+          mostrarHistorias();
+          limpiarFormulario();
+        };
+        reader.readAsDataURL(imagenInput.files[0]);
+      } else {
+        historias.push({ titulo, texto, imagen: null });
+        localStorage.setItem('historias', JSON.stringify(historias));
+        mostrarHistorias();
+        limpiarFormulario();
+      }
+    }
+
+    function eliminarHistoria(index) {
+      if (confirm("¿Eliminar este recuerdo?")) {
+        historias.splice(index, 1);
+        localStorage.setItem('historias', JSON.stringify(historias));
+        mostrarHistorias();
+      }
+    }
+
+    function limpiarFormulario() {
+      document.getElementById('titulo').value = '';
+      document.getElementById('texto').value = '';
+      document.getElementById('imagenInput').value = '';
+    }
+
+    mostrarHistorias();
+  </script>
+</body>
+</html>
